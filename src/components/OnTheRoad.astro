@@ -48,12 +48,32 @@
   if (video) {
     video.muted = true;
     video.playsInline = true;
+    video.defaultMuted = true;
+
     const go = () => {
       video.play().catch(() => {});
     };
+
     go();
+    video.addEventListener("loadedmetadata", go);
     video.addEventListener("loadeddata", go);
+    video.addEventListener("canplay", go);
     document.addEventListener("touchstart", go, { once: true, passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && video.paused) go();
+    });
+
+    // Some mobile browsers defer/pause playback for video that mounts off-screen.
+    // Nudge it again the moment it actually scrolls into view.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && video.paused) go();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(video);
   }
 </script>
 

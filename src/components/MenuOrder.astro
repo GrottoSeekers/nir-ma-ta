@@ -88,7 +88,7 @@ const items = [
           <div class="actions-row">
             <button type="button" class="btn place-btn" data-test="place-order" disabled>PLACE ORDER</button>
             <button type="button" class="btn clear-btn" data-test="clear-order" id="clear-btn" hidden>CLEAR</button>
-            <span class="demo-caption">Demo only — nothing is sent.</span>
+            <span class="demo-caption">Demo only — nothing is actually ordered.</span>
           </div>
         </div>
 
@@ -248,8 +248,8 @@ const items = [
         }
 
         if (item.single) addBtn("ADD", "add-single", "", item.single);
-        if (item.hot) addBtn("ADD HOT", "add-hot", "Hot", item.hot);
-        if (item.ice) addBtn("ADD ICE", "add-ice", "Ice", item.ice);
+        if (item.hot) addBtn("HOT", "add-hot", "Hot", item.hot);
+        if (item.ice) addBtn("ICE", "add-ice", "Ice", item.ice);
       } else {
         pricePanel.hidden = true;
         emptyState.hidden = false;
