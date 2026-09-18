@@ -3,14 +3,14 @@ const navItems = [
   { href: "#story", label: "Story" },
   { href: "#menu", label: "Menu" },
   { href: "#reviews", label: "Reviews" },
-  { href: "#find-us", label: "Find Us" },
+  { href: "#find", label: "Find us" },
 ];
 ---
 
 <header class="site-header">
-  <div class="wrap bar">
-    <a href="#" class="brand">
-      <img src="/images/logo.webp" alt="NIR-MA-TA Coffee" width="38" height="38" />
+  <div class="bar wrap">
+    <a href="#top" class="brand">
+      <img src="/images/logo.webp" alt="NIR-MA-TA Coffee" width="40" height="40" />
       <span class="brand-name">NIR&#8209;MA&#8209;TA</span>
     </a>
 
@@ -20,33 +20,24 @@ const navItems = [
       ))}
     </nav>
 
-    <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer" class="ig-link" aria-label="NIR-MA-TA on Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z" />
-        <path d="M17.5 6.5h.01" />
-      </svg>
-    </a>
-
-    <a href="https://wa.me/6287860149337" target="_blank" rel="noopener noreferrer" class="btn btn-primary bar-cta">
-      WhatsApp
-    </a>
-
-    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <div class="drawer" id="drawer">
-    {navItems.map((item) => (
-      <a href={item.href} data-drawer-link>{item.label}</a>
-    ))}
-    <a href="https://wa.me/6287860149337" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-drawer-link>
-      WhatsApp us
-    </a>
-    <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer" class="drawer-ig" data-drawer-link>
-      Follow @nir.ma.ta on Instagram
-    </a>
+    <div class="actions">
+      <a
+        href="https://www.instagram.com/nir.ma.ta"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="NIR-MA-TA on Instagram"
+        class="ig-btn"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
+          <path d="M17.5 6.5h.01"></path>
+        </svg>
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=NIR-MA-TA+COFFEE+Senggigi+Lombok" target="_blank" rel="noopener noreferrer" class="visit-btn">
+        VISIT US
+      </a>
+    </div>
   </div>
 </header>
 
@@ -55,169 +46,120 @@ const navItems = [
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+    background: #fff;
+    border-bottom: 2px solid var(--ink);
   }
 
   .bar {
     display: flex;
     align-items: center;
-    gap: 20px;
-    height: 72px;
+    gap: 16px 20px;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
+    flex: 0 0 auto;
     text-decoration: none;
     color: var(--ink);
-    margin-right: auto;
+  }
+
+  .brand:hover {
+    color: var(--ink);
   }
 
   .brand img {
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
   }
 
   .brand-name {
-    font-family: "Baloo 2", sans-serif;
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: 0.01em;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 17px;
+    letter-spacing: -0.4px;
+    color: var(--ink);
   }
 
   .nav {
     display: flex;
-    gap: 28px;
+    gap: 14px 18px;
+    margin-left: auto;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .nav a {
-    text-decoration: none;
+    font-family: "Work Sans", sans-serif;
+    font-size: 13.5px;
     font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--ink-dim);
-    transition: color 0.2s ease;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--ink);
   }
 
   .nav a:hover {
     color: var(--red);
   }
 
-  .bar-cta {
-    height: 42px;
-    min-height: 42px;
-    padding: 0 20px;
-    font-size: 0.9rem;
-  }
-
-  .ig-link {
+  .actions {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .ig-btn {
+    width: 38px;
+    height: 38px;
+    border: 2px solid var(--ink);
     border-radius: 50%;
-    border: 1.5px solid var(--line-strong);
-    color: var(--ink);
-    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .ig-link svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .ig-link:hover {
-    color: var(--red);
-    border-color: var(--red);
-    transform: translateY(-2px);
-  }
-
-  .drawer a.drawer-ig {
-    font-weight: 600;
-    color: var(--red);
-  }
-
-  .menu-toggle {
-    display: none;
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: transparent;
-    flex-direction: column;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-  }
-
-  .menu-toggle span {
-    width: 22px;
-    height: 2.5px;
-    background: var(--ink);
-    border-radius: 2px;
-    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
-  }
-
-  .menu-toggle.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-  .menu-toggle.is-open span:nth-child(2) { opacity: 0; }
-  .menu-toggle.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-
-  .drawer {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    padding: 10px 24px 22px;
-    background: #ffffff;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .drawer.open {
-    display: flex;
-  }
-
-  .drawer a {
-    text-decoration: none;
     color: var(--ink);
-    font-weight: 600;
-    padding: 12px 4px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--line);
+    transition: background var(--ease), border-color var(--ease), color var(--ease);
   }
 
-  .drawer .btn {
-    margin-top: 10px;
-    align-self: flex-start;
+  .ig-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ig-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  .visit-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--red);
+    color: #fff;
+    padding: 12px 22px;
+    min-height: 46px;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    transition: background var(--ease);
+  }
+
+  .visit-btn:hover {
+    background: var(--ink);
+    color: #fff;
   }
 
   @media (max-width: 780px) {
-    .nav, .bar-cta {
-      display: none;
-    }
-    .menu-toggle {
-      display: flex;
+    .nav {
+      order: 99;
+      flex-basis: 100%;
+      margin-left: 0;
     }
   }
 </style>
-
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const drawer = document.getElementById("drawer");
-
-  toggle?.addEventListener("click", () => {
-    const isOpen = drawer?.classList.toggle("open");
-    toggle.classList.toggle("is-open", Boolean(isOpen));
-    toggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
-  });
-
-  drawer?.querySelectorAll("[data-drawer-link]").forEach((link) => {
-    link.addEventListener("click", () => {
-      drawer.classList.remove("open");
-      toggle?.classList.remove("is-open");
-      toggle?.setAttribute("aria-expanded", "false");
-    });
-  });
-</script>

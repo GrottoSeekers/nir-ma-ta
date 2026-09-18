@@ -1,0 +1,44 @@
+<section class="ig-bar-section">
+  <div class="wrap">
+    <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer" class="ig-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
+        <path d="M17.5 6.5h.01"></path>
+      </svg>
+      Follow @nir.ma.ta
+    </a>
+  </div>
+</section>
+
+<style>
+  .ig-bar-section {
+    padding-bottom: clamp(52px, 8vw, 88px);
+  }
+
+  .ig-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--red);
+    color: #fff;
+    padding: 22px;
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(18px, 2.4vw, 26px);
+    letter-spacing: -0.4px;
+    text-transform: uppercase;
+    transition: background var(--ease);
+  }
+
+  .ig-bar:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .ig-bar svg {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 auto;
+  }
+</style>

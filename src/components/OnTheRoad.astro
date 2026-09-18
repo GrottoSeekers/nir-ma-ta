@@ -1,0 +1,125 @@
+<section class="road">
+  <div class="wrap road-grid">
+    <div class="road-video">
+      <video
+        id="road-video"
+        src="/video/nirmata.mp4"
+        poster="/images/street-hangout.webp"
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        preload="auto"
+      ></video>
+    </div>
+    <div class="road-copy">
+      <div>
+        <span class="eyebrow">ON THE ROAD</span>
+        <h2>Pull up a stool.</h2>
+        <p class="road-lead">
+          Stools on the pavement, coffee made by hand, and whoever happens to
+          be passing. This is how most people find NIR-MA-TA for the first
+          time.
+        </p>
+      </div>
+      <img
+        src="/images/street-hangout.webp"
+        alt="Customers on stools chatting on the street in Senggigi"
+        width="1000"
+        height="1777"
+        loading="lazy"
+        class="road-photo"
+      />
+      <img
+        src="/images/shop-1.webp"
+        alt="Inside the new NIR-MA-TA shop, brick wall and fresh flowers"
+        width="1000"
+        height="1200"
+        loading="lazy"
+        class="road-photo road-photo-interior"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  const video = document.getElementById("road-video") as HTMLVideoElement | null;
+  if (video) {
+    video.muted = true;
+    video.playsInline = true;
+    const go = () => {
+      video.play().catch(() => {});
+    };
+    go();
+    video.addEventListener("loadeddata", go);
+    document.addEventListener("touchstart", go, { once: true, passive: true });
+  }
+</script>
+
+<style>
+  .road {
+    background: var(--ink);
+    color: #fff;
+    padding: clamp(40px, 6vw, 72px) 0;
+  }
+
+  .road-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(20px, 3vw, 36px);
+    align-items: stretch;
+  }
+
+  .road-video {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(420px, 62vh, 660px);
+    background: var(--black);
+  }
+
+  .road-video video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .road-copy {
+    display: grid;
+    gap: clamp(16px, 2.4vw, 24px);
+    align-content: start;
+  }
+
+  h2 {
+    font-size: clamp(28px, 3.8vw, 46px);
+    letter-spacing: -1.3px;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+
+  .road-lead {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--dark-body);
+    margin: 0;
+    max-width: 440px;
+    text-wrap: pretty;
+  }
+
+  .road-photo {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .road-photo:not(.road-photo-interior) {
+    height: clamp(220px, 32vh, 340px);
+  }
+
+  .road-photo-interior {
+    height: clamp(200px, 28vh, 300px);
+    object-position: center 62%;
+  }
+</style>

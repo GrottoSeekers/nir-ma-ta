@@ -1,0 +1,815 @@
+---
+const items = [
+  { name: "Orange Amer", group: "Coffee", ice: 28000, box: [49.5, 24.75, 40.3, 3.4] },
+  { name: "Palm Sugar", group: "Coffee", hot: 28000, ice: 30000, box: [49.5, 28.15, 40.3, 2.6] },
+  { name: "Caramel", group: "Coffee", hot: 28000, ice: 30000, box: [49.5, 30.75, 40.3, 2.55] },
+  { name: "Vanilla", group: "Coffee", hot: 28000, ice: 30000, box: [49.5, 33.3, 40.3, 2.5] },
+  { name: "Latte", group: "Coffee", hot: 25000, ice: 28000, box: [49.5, 35.8, 40.3, 2.4] },
+  { name: "Espresso", group: "Coffee", hot: 20000, box: [49.5, 38.2, 40.3, 2.5] },
+  { name: "Cappucino", group: "Coffee", hot: 25000, ice: 28000, box: [49.5, 40.7, 40.3, 2.7] },
+  { name: "Flat White", group: "Coffee", hot: 25000, box: [49.5, 43.4, 40.3, 2.75] },
+  { name: "Split", group: "Coffee", hot: 35000, box: [49.5, 46.15, 40.3, 2.75] },
+  { name: "Indonesiano", group: "Coffee", hot: 25000, ice: 28000, box: [49.5, 48.9, 40.3, 4.15] },
+  { name: "Chocolate", group: "Non coffee", hot: 25000, ice: 28000, box: [12, 62.35, 35.4, 2.5] },
+  { name: "Matcha", group: "Non coffee", hot: 25000, ice: 28000, box: [12, 64.85, 35.4, 2.8] },
+  { name: "Kombucha", group: "Non coffee", ice: 35000, box: [12, 67.65, 35.4, 4.15] },
+  { name: "Oat Milk", group: "Add on", single: 10000, box: [12, 77.1, 35.4, 2.4] },
+  { name: "Extra Shot", group: "Add on", single: 10000, box: [12, 79.3, 35.4, 2.2] },
+];
+---
+
+<section id="menu" class="menu-section">
+  <div class="wrap">
+    <div class="menu-intro">
+      <span class="eyebrow">THE MENU</span>
+      <h2>Straight off the board.</h2>
+      <p class="menu-lead">What's your order? Tap a drink for the price.</p>
+    </div>
+
+    <div class="menu-cols">
+      <div class="card-col">
+        <img
+          src="/images/menu-card.webp"
+          alt="NIR-MA-TA menu card: coffee, non-coffee and add-ons with hot and ice prices in Rupiah"
+          width="1414"
+          height="2000"
+          class="menu-image"
+        />
+        <div class="highlight" id="highlight" aria-hidden="true"></div>
+      </div>
+
+      <div class="order-col">
+        <div class="builder" id="builder">
+          <div class="chips" id="chips">
+            {items.map((item, i) => (
+              <button
+                type="button"
+                class="chip"
+                data-test="menu-chip"
+                data-index={i}
+                aria-pressed="false"
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+
+          <div class="price-panel" id="price-panel" data-test="price-panel" hidden>
+            <div class="panel-group" id="panel-group"></div>
+            <div class="panel-name" id="panel-name"></div>
+            <div class="panel-options" id="panel-options"></div>
+          </div>
+
+          <div class="empty-state" id="empty-state">
+            <div class="empty-heading">Pick a drink</div>
+            <p>We'll point it out on the card and you can build a mock order.</p>
+          </div>
+
+          <div class="ticket">
+            <div class="ticket-head">
+              <span class="ticket-title">YOUR ORDER</span>
+              <span class="spacer"></span>
+              <span class="ticket-count" data-test="order-count">EMPTY</span>
+            </div>
+            <div class="ticket-empty" id="ticket-empty">Nothing added yet.</div>
+            <div class="ticket-lines" id="ticket-lines"></div>
+            <div class="ticket-total">
+              <span class="total-label">TOTAL</span>
+              <span class="spacer"></span>
+              <span class="total-amount tabular" data-test="order-total">Rp 0</span>
+            </div>
+          </div>
+
+          <div class="addon-footnote">
+            <span class="addon-label">ADD ON</span>
+            <span class="addon-copy">Oat milk 10.000 · Extra shot 10.000</span>
+          </div>
+
+          <div class="actions-row">
+            <button type="button" class="btn place-btn" data-test="place-order" disabled>PLACE ORDER</button>
+            <button type="button" class="btn clear-btn" data-test="clear-order" id="clear-btn" hidden>CLEAR</button>
+            <span class="demo-caption">Demo only — nothing is sent.</span>
+          </div>
+        </div>
+
+        <div class="receipt" id="receipt" data-test="receipt" hidden>
+          <div class="receipt-head">
+            <div class="receipt-brand">NIR-MA-TA</div>
+            <div class="receipt-addr">JL. RAYA SENGGIGI · LOMBOK</div>
+          </div>
+          <div class="receipt-meta">
+            <span id="receipt-no"></span>
+            <span id="receipt-time"></span>
+          </div>
+          <div class="receipt-lines" id="receipt-lines"></div>
+          <div class="receipt-total">
+            <span class="total-label">TOTAL</span>
+            <span class="spacer"></span>
+            <span class="total-amount tabular" id="receipt-total">Rp 0</span>
+          </div>
+          <p class="receipt-note">
+            Terima kasih! This is a demo receipt — no order was placed. Come see Juandi on Jl. Raya Senggigi.
+          </p>
+          <button type="button" class="btn start-again-btn" data-test="start-again">START AGAIN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ items }}>
+  (function () {
+    const ITEMS = items;
+    let pick = null;
+    let order = [];
+    let placed = false;
+    let receipt = null;
+
+    const highlight = document.getElementById("highlight");
+    const chipsEl = document.getElementById("chips");
+    const pricePanel = document.getElementById("price-panel");
+    const panelGroup = document.getElementById("panel-group");
+    const panelName = document.getElementById("panel-name");
+    const panelOptions = document.getElementById("panel-options");
+    const emptyState = document.getElementById("empty-state");
+    const ticketEmpty = document.getElementById("ticket-empty");
+    const ticketLines = document.getElementById("ticket-lines");
+    const orderTotalEl = document.querySelector('[data-test="order-total"]');
+    const orderCountEl = document.querySelector('[data-test="order-count"]');
+    const placeBtn = document.querySelector('[data-test="place-order"]');
+    const clearBtn = document.getElementById("clear-btn");
+    const builder = document.getElementById("builder");
+    const receiptEl = document.getElementById("receipt");
+    const receiptNoEl = document.getElementById("receipt-no");
+    const receiptTimeEl = document.getElementById("receipt-time");
+    const receiptLinesEl = document.getElementById("receipt-lines");
+    const receiptTotalEl = document.getElementById("receipt-total");
+
+    function fmt(n) {
+      return "Rp " + n.toLocaleString("id-ID");
+    }
+
+    function keyOf(name, variant) {
+      return name + "|" + variant;
+    }
+
+    function addLine(item, variant, price) {
+      const key = keyOf(item.name, variant);
+      const existing = order.find((l) => l.key === key);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        order.push({ key, name: item.name, variant, price, qty: 1 });
+      }
+      render();
+    }
+
+    function bump(key, d) {
+      const line = order.find((l) => l.key === key);
+      if (!line) return;
+      line.qty += d;
+      if (line.qty <= 0) {
+        order = order.filter((l) => l.key !== key);
+      }
+      render();
+    }
+
+    function removeLine(key) {
+      order = order.filter((l) => l.key !== key);
+      render();
+    }
+
+    function selectChip(i) {
+      pick = pick === i ? null : i;
+      render();
+    }
+
+    function placeOrder() {
+      if (!order.length) return;
+      placed = true;
+      receipt = {
+        no: "#" + String(Math.floor(Math.random() * 9000) + 1000),
+        time: new Date().toLocaleString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      render();
+    }
+
+    function clearOrder() {
+      order = [];
+      placed = false;
+      receipt = null;
+      pick = null;
+      render();
+    }
+
+    function render() {
+      // Chips
+      chipsEl.querySelectorAll(".chip").forEach((btn) => {
+        const i = Number(btn.dataset.index);
+        const on = pick === i;
+        btn.classList.toggle("selected", on);
+        btn.setAttribute("aria-pressed", String(on));
+      });
+
+      // Highlight
+      const item = pick === null ? null : ITEMS[pick];
+      if (item) {
+        const [l, t, w, h] = item.box;
+        highlight.style.display = "block";
+        highlight.style.left = l - 1.5 + "%";
+        highlight.style.top = t - 0.6 + "%";
+        highlight.style.width = w + 3 + "%";
+        highlight.style.height = h + 1.2 + "%";
+      } else {
+        highlight.style.display = "none";
+      }
+
+      // Price panel / empty state
+      if (item) {
+        pricePanel.hidden = false;
+        emptyState.hidden = true;
+        panelGroup.textContent = item.group.toUpperCase();
+        panelName.textContent = item.name;
+        panelOptions.innerHTML = "";
+
+        function addBtn(label, testId, variant, price) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "add-btn";
+          b.dataset.test = testId;
+          b.textContent = label + " — " + price.toLocaleString("id-ID");
+          b.addEventListener("click", () => addLine(item, variant, price));
+          panelOptions.appendChild(b);
+        }
+
+        if (item.single) addBtn("ADD", "add-single", "", item.single);
+        if (item.hot) addBtn("ADD HOT", "add-hot", "Hot", item.hot);
+        if (item.ice) addBtn("ADD ICE", "add-ice", "Ice", item.ice);
+      } else {
+        pricePanel.hidden = true;
+        emptyState.hidden = false;
+      }
+
+      // Ticket
+      ticketEmpty.hidden = order.length > 0;
+      ticketLines.innerHTML = "";
+      order.forEach((l) => {
+        const row = document.createElement("div");
+        row.className = "line";
+        row.setAttribute("data-test", "order-line");
+
+        const detail = (l.variant ? l.variant + " · " : "") + fmt(l.price) + " each";
+
+        row.innerHTML =
+          '<div class="line-info"><div class="line-name">' +
+          l.name +
+          '</div><div class="line-detail">' +
+          detail +
+          '</div></div>' +
+          '<div class="stepper">' +
+          '<button type="button" class="step-btn" data-test="order-dec" aria-label="Remove one">−</button>' +
+          '<span class="qty tabular" data-test="order-qty">' +
+          l.qty +
+          '</span>' +
+          '<button type="button" class="step-btn" data-test="order-inc" aria-label="Add one">+</button>' +
+          '</div>' +
+          '<span class="line-total tabular">' +
+          fmt(l.price * l.qty) +
+          '</span>' +
+          '<button type="button" class="remove-btn" data-test="order-remove" aria-label="Remove item">✕</button>';
+
+        row.querySelector('[data-test="order-dec"]').addEventListener("click", () => bump(l.key, -1));
+        row.querySelector('[data-test="order-inc"]').addEventListener("click", () => bump(l.key, 1));
+        row.querySelector('[data-test="order-remove"]').addEventListener("click", () => removeLine(l.key));
+
+        ticketLines.appendChild(row);
+      });
+
+      const total = order.reduce((t, l) => t + l.price * l.qty, 0);
+      const count = order.reduce((t, l) => t + l.qty, 0);
+      orderTotalEl.textContent = fmt(total);
+      orderCountEl.textContent = count === 0 ? "EMPTY" : count === 1 ? "1 DRINK" : count + " DRINKS";
+
+      placeBtn.disabled = order.length === 0;
+      clearBtn.hidden = order.length === 0;
+
+      // Receipt / builder swap
+      if (placed && receipt) {
+        builder.hidden = true;
+        receiptEl.hidden = false;
+        receiptNoEl.textContent = "ORDER " + receipt.no;
+        receiptTimeEl.textContent = receipt.time;
+        receiptLinesEl.innerHTML = "";
+        order.forEach((l) => {
+          const row = document.createElement("div");
+          row.className = "receipt-line";
+          const label = l.qty + "× " + l.name + (l.variant ? " (" + l.variant + ")" : "");
+          row.innerHTML =
+            '<span class="receipt-line-name">' + label + '</span><span class="spacer"></span>' +
+            '<span class="receipt-line-total tabular">' + fmt(l.price * l.qty) + '</span>';
+          receiptLinesEl.appendChild(row);
+        });
+        receiptTotalEl.textContent = fmt(total);
+      } else {
+        builder.hidden = false;
+        receiptEl.hidden = true;
+      }
+    }
+
+    chipsEl.querySelectorAll(".chip").forEach((btn) => {
+      btn.addEventListener("click", () => selectChip(Number(btn.dataset.index)));
+    });
+
+    placeBtn.addEventListener("click", placeOrder);
+    clearBtn.addEventListener("click", clearOrder);
+    document.querySelector('[data-test="start-again"]').addEventListener("click", clearOrder);
+
+    render();
+  })();
+</script>
+
+<style>
+  .menu-section {
+    background: var(--light-grey-bg);
+  }
+
+  .menu-section > .wrap {
+    padding-top: clamp(52px, 8vw, 88px);
+    padding-bottom: clamp(52px, 8vw, 88px);
+  }
+
+  .menu-intro {
+    max-width: 620px;
+    margin-bottom: 40px;
+  }
+
+  .menu-lead {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--body-grey);
+    margin: 0;
+  }
+
+  .menu-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(28px, 4vw, 48px);
+    align-items: start;
+  }
+
+  .card-col {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.12);
+    width: 100%;
+  }
+
+  .menu-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .highlight {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    border: 3px solid var(--red);
+    background: rgba(238, 28, 37, 0.1);
+    border-radius: 2px;
+  }
+
+  .order-col {
+    min-width: 0;
+  }
+
+  .builder {
+    display: grid;
+    gap: clamp(18px, 2.4vw, 24px);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    min-height: 46px;
+    cursor: pointer;
+    border: 2px solid var(--border-grey);
+    background: #fff;
+    color: var(--ink);
+    transition: background var(--ease), border-color var(--ease), color var(--ease);
+  }
+
+  .chip.selected {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+
+  .price-panel {
+    background: var(--red);
+    color: #fff;
+    padding: clamp(22px, 3vw, 30px);
+  }
+
+  .panel-group {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+
+  .panel-name {
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1;
+    letter-spacing: -1.2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .panel-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .empty-state {
+    border: 2px dashed var(--dashed-border);
+    padding: clamp(22px, 3vw, 30px);
+    color: var(--muted-grey);
+  }
+
+  .empty-heading {
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.1;
+    letter-spacing: -0.6px;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .empty-state p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ticket {
+    border: 2px solid var(--ink);
+    background: #fff;
+  }
+
+  .ticket-head {
+    background: var(--ink);
+    color: #fff;
+    padding: 13px 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .ticket-title {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 16px;
+    letter-spacing: -0.2px;
+    text-transform: uppercase;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .ticket-count {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--dark-body);
+  }
+
+  .ticket-empty {
+    margin: 0;
+    padding: 22px 18px;
+    font-size: 15.5px;
+    color: var(--muted-grey);
+  }
+
+  .ticket-total {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: var(--light-grey-bg);
+  }
+
+  .total-label {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .total-amount {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .addon-footnote {
+    border-top: 2px solid var(--ink);
+    padding-top: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  .addon-label {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .addon-copy {
+    color: var(--body-grey);
+  }
+
+  .actions-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .place-btn {
+    padding: 15px 26px;
+    min-height: 46px;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    border: none;
+    background: var(--red);
+    color: #fff;
+    cursor: pointer;
+    transition: background var(--ease);
+  }
+
+  .place-btn:hover:not(:disabled) {
+    background: var(--ink);
+  }
+
+  .place-btn:disabled {
+    background: #dcdcdc;
+    color: var(--footer-grey);
+    cursor: not-allowed;
+  }
+
+  .clear-btn {
+    border: 2px solid var(--border-grey);
+    background: none;
+    color: var(--ink);
+    padding: 14px 22px;
+    min-height: 46px;
+    cursor: pointer;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: border-color var(--ease);
+  }
+
+  .clear-btn:hover {
+    border-color: var(--ink);
+  }
+
+  .demo-caption {
+    font-size: 13.5px;
+    color: var(--muted-grey);
+  }
+
+  .receipt {
+    background: #fff;
+    border: 2px solid var(--ink);
+    padding: clamp(24px, 3.4vw, 36px);
+    max-width: 460px;
+  }
+
+  .receipt-head {
+    text-align: center;
+    border-bottom: 2px dashed var(--dashed-border);
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+  }
+
+  .receipt-brand {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .receipt-addr {
+    font-size: 12.5px;
+    letter-spacing: 1.4px;
+    color: var(--muted-grey);
+    margin-top: 6px;
+  }
+
+  .receipt-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted-grey);
+    margin-bottom: 16px;
+  }
+
+  .receipt-total {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 16px 0 0;
+  }
+
+  .receipt-total .total-amount {
+    font-size: 24px;
+  }
+
+  .receipt-note {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--muted-grey);
+    margin: 18px 0 22px;
+    text-align: center;
+  }
+
+  .start-again-btn {
+    width: 100%;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    min-height: 46px;
+    cursor: pointer;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    transition: background var(--ease);
+  }
+
+  .start-again-btn:hover {
+    background: var(--ink);
+  }
+
+  @media (max-width: 780px) {
+    .menu-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<style is:global>
+  /*
+    Astro's scoped-style class is only injected into elements present in the
+    static template at build time. Order lines, receipt lines and the price
+    panel's add buttons are all created client-side, so their rules live here
+    instead — otherwise they'd silently never match.
+  */
+  #menu .add-btn {
+    background: #fff;
+    color: var(--red);
+    border: none;
+    padding: 14px 20px;
+    min-height: 46px;
+    cursor: pointer;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    transition: background var(--ease), color var(--ease);
+  }
+
+  #menu .add-btn:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  #menu .line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  #menu .line-info {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  #menu .line-name {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+
+  #menu .line-detail {
+    font-size: 13px;
+    color: var(--muted-grey);
+    margin-top: 2px;
+  }
+
+  #menu .stepper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+  }
+
+  #menu .step-btn {
+    width: 38px;
+    height: 38px;
+    border: 2px solid var(--border-grey);
+    background: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--ink);
+    transition: border-color var(--ease), color var(--ease);
+  }
+
+  #menu .step-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  #menu .qty {
+    min-width: 22px;
+    text-align: center;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  #menu .line-total {
+    flex: 0 0 auto;
+    font-size: 15px;
+    min-width: 64px;
+    text-align: right;
+  }
+
+  #menu .remove-btn {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #9a9a9a;
+    font-size: 16px;
+    transition: color var(--ease);
+  }
+
+  #menu .remove-btn:hover {
+    color: var(--red);
+  }
+
+  #menu .receipt-line {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--dotted-divider);
+  }
+
+  #menu .receipt-line-name {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+
+  #menu .receipt-line-total {
+    font-size: 14.5px;
+  }
+</style>

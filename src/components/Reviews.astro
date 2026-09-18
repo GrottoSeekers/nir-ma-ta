@@ -1,126 +1,90 @@
 ---
 const reviews = [
-  {
-    quote: "Genuinely the nicest coffee we've had in our 4 weeks in Indonesia! We had just been complaining that there didn't seem to be many good coffee places in Senggigi before we stumbled on Andy.",
-    name: "Jon Wylie",
-  },
-  {
-    quote: "Most authentic coffee experience in Senggigi!! A coffee on the road, makes everyone stop, have a chat with the locals only with good vibes!!! Andy makes this place feel special!",
-    name: "Tiago Belles",
-  },
-  {
-    quote: "The coffee is fantastic, so well made and for a great price. Lovely ambience and great service from the barista, constantly learning to improve his craft. His equipment is wonderful and cleverly modified.",
-    name: "Judy Chang",
-  },
-  {
-    quote: "Great specialty coffee, Andy is very professional, easy going and cheerful. You're in for some good time and a great cup.",
-    name: "Itai Sapir",
-  },
-  {
-    quote: "Already visited many times when he was selling on the street, my favorite place. Great coffee and super friendly owner!! From a street-barista to a coffeeshop-owner, congratulations!",
-    name: "Nalu House Gili Trawangan",
-  },
-  {
-    quote: "My first hand pressed cappuccino and WOW. If you love a good cup of coffee then give Andy a visit. He is also next to the bus stop close to Attara Inn.",
-    name: "Abbas Jamie",
-  },
+  { quote: "Genuinely the nicest coffee we've had in our four weeks in Indonesia.", name: "Jon Wylie" },
+  { quote: "A coffee on the road that makes everyone stop and have a chat with the locals. Only good vibes.", name: "Tiago Belles" },
+  { quote: "So well made, and for a great price. His equipment is wonderful and cleverly modified.", name: "Judy Chang" },
 ];
 ---
 
-<section class="section" id="reviews">
+<section id="reviews" class="section">
   <div class="wrap">
-    <div class="reviews-head reveal">
-      <span class="eyebrow">Reviews</span>
-      <h2>Five stars, eighty-four times over.</h2>
-      <div class="rating-badge">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span><strong>5.0</strong> average · 84 Google reviews</span>
-      </div>
+    <div class="reviews-head">
+      <span class="eyebrow">REVIEWS</span>
+      <h2>What people say.</h2>
     </div>
-
-    <div class="reviews-grid reveal-stagger">
+    <div class="reviews-grid">
       {reviews.map((r) => (
-        <figure class="review card">
+        <figure class="review">
           <span class="stars" aria-hidden="true">★★★★★</span>
           <blockquote>{r.quote}</blockquote>
           <figcaption>{r.name}</figcaption>
         </figure>
       ))}
     </div>
-
-    <div class="reviews-footer reveal">
-      <a
-        href="https://www.google.com/maps/search/?api=1&query=NIR-MA-TA+COFFEE+Senggigi+Lombok"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="arrow-link"
-      >
-        Read all 84 reviews on Google →
-      </a>
-    </div>
+    <a
+      href="https://www.google.com/maps/search/?api=1&query=NIR-MA-TA+COFFEE+Senggigi+Lombok"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="reviews-link"
+    >
+      READ THE REVIEWS ON GOOGLE →
+    </a>
   </div>
 </section>
 
 <style>
   .reviews-head {
-    text-align: center;
     max-width: 620px;
-    margin: 0 auto 40px;
-  }
-
-  .rating-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 0.95rem;
-    color: var(--ink-dim);
+    margin-bottom: 48px;
   }
 
   .reviews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 28px;
   }
 
   .review {
-    padding: 24px;
+    margin: 0;
+    border-top: 3px solid var(--red);
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
   }
 
-  .review .stars {
-    font-size: 0.85rem;
+  .stars {
+    color: var(--red);
+    letter-spacing: 2px;
+    font-size: 14px;
   }
 
   .review blockquote {
-    font-size: 0.96rem;
+    margin: 0;
+    font-size: 17.5px;
+    line-height: 1.6;
     color: var(--ink);
-    line-height: 1.55;
-    flex: 1;
+    text-wrap: pretty;
   }
 
   .review figcaption {
+    font-family: "Archivo", sans-serif;
     font-weight: 700;
-    font-size: 0.88rem;
-    color: var(--ink-dim);
+    font-size: 13.5px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted-grey);
+    margin-top: auto;
   }
 
-  .reviews-footer {
-    text-align: center;
-    margin-top: 36px;
-  }
-
-  .arrow-link {
+  .reviews-link {
     display: inline-block;
+    margin-top: 44px;
+    font-family: "Archivo", sans-serif;
     font-weight: 700;
-    color: var(--red);
-    text-decoration: none;
-    transition: transform 0.2s var(--ease);
-  }
-
-  .arrow-link:hover {
-    transform: translateX(3px);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 3px;
   }
 </style>

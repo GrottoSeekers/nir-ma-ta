@@ -1,46 +1,58 @@
-<section class="section" id="story">
+<section id="story" class="section">
   <div class="wrap story-grid">
-    <div class="story-copy reveal">
-      <span class="eyebrow">Our Story</span>
-      <h2>Sejak hari ini.<br /><span class="translation">Since day one.</span></h2>
-      <p class="lead">
-        Juandi — most people know him as Andi — started NIR-MA-TA as a single
-        cart on the roadside in Senggigi. No electricity, no fancy machine.
-        Beans ground by hand, espresso pulled by hand, brewed to order for
-        whoever pulled up a stool.
+    <div class="story-copy">
+      <span class="eyebrow">THE STORY</span>
+      <h2>One cart, one guy, one road.</h2>
+      <p class="body-p">
+        Juandi started with a single cart on the roadside. No power point, no
+        fancy machine — beans ground by hand, espresso pulled by hand, brewed
+        for whoever pulled up a stool.
       </p>
-      <p class="lead">
-        Travellers kept stopping. They kept coming back. Some left a sticker on
-        the cart on their way out — you'll still find them plastered across it,
-        from every corner of the world. Over a year on the road, that one cart
-        earned a perfect run of 5-star reviews. Now it's a shop of its own,
-        right next to the money exchange on Jl. Raya Senggigi — same coffee,
-        same conversation, same guy.
+      <p class="body-p">
+        Travellers kept stopping, then kept coming back, and most left a
+        sticker behind. He's fussy about one thing above all: the beans. He's
+        convinced he pours the best in Lombok, and he'll happily tell you why.
       </p>
-
-      <blockquote class="story-quote">
-        <p>
-          "Awesome coffee made from fresh local beans. Best espresso I've had
-          in Lombok. Made without electricity — <strong>just gas and muscle</strong>
-          on a manual espresso machine, with proper extraction technique."
-        </p>
-        <cite>— Dominik Krchnavy, Google review</cite>
+      <p class="body-p last">
+        The cart became a shop next to the money exchange on Jl. Raya
+        Senggigi. Next comes a kitchen — one step in a twelve-year plan he's
+        had in his head the whole time.
+      </p>
+      <blockquote class="pull-quote">
+        <p>&ldquo;Best espresso I've had in Lombok. Made without electricity — just gas and muscle.&rdquo;</p>
+        <cite>Dominik Krchnavy · Google review</cite>
       </blockquote>
     </div>
 
-    <div class="story-stats reveal-stagger">
-      <div class="stat card">
-        <span class="stat-num">5.0★</span>
-        <span class="stat-label">average rating</span>
+    <div class="collage">
+      <img
+        src="/images/cart-stickers.webp"
+        alt="The NIR-MA-TA cart covered in stickers left by travellers"
+        width="1000"
+        height="1777"
+        loading="lazy"
+        class="collage-full collage-stickers"
+      />
+      <div class="collage-panel">
+        <span class="panel-text">SEJAK<br />HARI<br />INI</span>
+        <span class="panel-sub">SINCE DAY ONE</span>
       </div>
-      <div class="stat card">
-        <span class="stat-num">84</span>
-        <span class="stat-label">Google reviews</span>
-      </div>
-      <div class="stat card">
-        <span class="stat-num">1+ yr</span>
-        <span class="stat-label">loved on the road, before the shop</span>
-      </div>
+      <img
+        src="/images/coffee-flight.webp"
+        alt="Latte, espresso and water on a tray in the sun"
+        width="1000"
+        height="1200"
+        loading="lazy"
+        class="collage-flight"
+      />
+      <img
+        src="/images/friends-jungle.webp"
+        alt="Juandi and friends sitting out the back"
+        width="1080"
+        height="608"
+        loading="lazy"
+        class="collage-full collage-crew"
+      />
     </div>
   </div>
 </section>
@@ -48,81 +60,97 @@
 <style>
   .story-grid {
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: clamp(32px, 5vw, 64px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(32px, 5vw, 56px);
     align-items: start;
   }
 
-  .translation {
-    display: block;
-    font-family: "Work Sans", sans-serif;
-    font-weight: 500;
-    font-size: 0.5em;
-    color: var(--ink-faint);
-    letter-spacing: 0.02em;
-    margin-top: 4px;
+  .body-p {
+    font-size: 17.5px;
+    line-height: 1.7;
+    color: var(--body-grey);
+    margin: 0 0 18px;
+    text-wrap: pretty;
   }
 
-  .story-copy .lead {
-    margin-bottom: 16px;
-    max-width: 60ch;
+  .body-p.last {
+    margin-bottom: 30px;
   }
 
-  .story-quote {
-    margin-top: 26px;
-    padding: 20px 24px;
-    border-left: 3px solid var(--red);
-    background: var(--bg-raised);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  .pull-quote {
+    margin: 0;
+    border-left: 4px solid var(--red);
+    padding-left: 22px;
   }
 
-  .story-quote p {
-    font-size: 1rem;
+  .pull-quote p {
+    font-family: "Archivo", sans-serif;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.45;
+    margin: 0 0 12px;
     color: var(--ink);
-    margin-bottom: 8px;
   }
 
-  .story-quote cite {
-    font-size: 0.85rem;
-    color: var(--ink-faint);
+  .pull-quote cite {
     font-style: normal;
+    font-size: 14px;
+    color: var(--muted-grey);
   }
 
-  .story-stats {
+  .collage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .collage-full {
+    grid-column: 1 / -1;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .collage-stickers {
+    height: clamp(300px, 42vh, 460px);
+    object-position: center 62%;
+  }
+
+  .collage-panel {
+    background: var(--red);
+    color: #fff;
+    padding: clamp(18px, 2.4vw, 26px);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    justify-content: space-between;
+    min-height: clamp(180px, 24vw, 240px);
   }
 
-  .stat {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  .panel-text {
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(20px, 2.6vw, 30px);
+    line-height: 0.98;
+    letter-spacing: -0.9px;
+    text-transform: uppercase;
   }
 
-  .stat-num {
-    font-family: "Baloo 2", sans-serif;
-    font-weight: 800;
-    font-size: 2.2rem;
-    color: var(--red);
+  .panel-sub {
+    font-family: "Work Sans", sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: 0.9;
   }
 
-  .stat-label {
-    font-size: 0.9rem;
-    color: var(--ink-dim);
+  .collage-flight {
+    width: 100%;
+    height: 100%;
+    min-height: clamp(180px, 24vw, 240px);
+    object-fit: cover;
   }
 
-  @media (max-width: 900px) {
-    .story-grid {
-      grid-template-columns: 1fr;
-    }
-    .story-stats {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-    .stat {
-      flex: 1 1 160px;
-    }
+  .collage-crew {
+    height: clamp(180px, 24vw, 260px);
+    object-position: center 32%;
   }
 </style>
