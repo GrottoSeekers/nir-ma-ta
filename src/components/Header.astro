@@ -20,6 +20,14 @@ const navItems = [
       ))}
     </nav>
 
+    <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer" class="ig-link" aria-label="NIR-MA-TA on Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z" />
+        <path d="M17.5 6.5h.01" />
+      </svg>
+    </a>
+
     <a href="https://wa.me/6287860149337" target="_blank" rel="noopener noreferrer" class="btn btn-primary bar-cta">
       WhatsApp
     </a>
@@ -35,6 +43,9 @@ const navItems = [
     ))}
     <a href="https://wa.me/6287860149337" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-drawer-link>
       WhatsApp us
+    </a>
+    <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer" class="drawer-ig" data-drawer-link>
+      Follow @nir.ma.ta on Instagram
     </a>
   </div>
 </header>
@@ -98,6 +109,34 @@ const navItems = [
     min-height: 42px;
     padding: 0 20px;
     font-size: 0.9rem;
+  }
+
+  .ig-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line-strong);
+    color: var(--ink);
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ig-link svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .ig-link:hover {
+    color: var(--red);
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .drawer a.drawer-ig {
+    font-weight: 600;
+    color: var(--red);
   }
 
   .menu-toggle {
