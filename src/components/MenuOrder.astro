@@ -198,7 +198,20 @@ const items = [
       };
       render();
       requestAnimationFrame(() => {
-        receiptEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        const header = document.querySelector(".site-header");
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const availableHeight = window.innerHeight - headerHeight;
+        const rect = receiptEl.getBoundingClientRect();
+        const absoluteTop = rect.top + window.scrollY;
+
+        // Center the receipt inside the space below the sticky header. If the
+        // receipt is taller than that space, keep its top just under the
+        // header instead of centering it off-screen.
+        let targetScroll = absoluteTop + rect.height / 2 - (headerHeight + availableHeight / 2);
+        const maxScroll = absoluteTop - headerHeight;
+        if (targetScroll > maxScroll) targetScroll = maxScroll;
+
+        window.scrollTo({ top: targetScroll, behavior: "smooth" });
       });
     }
 
