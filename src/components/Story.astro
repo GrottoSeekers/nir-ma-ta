@@ -1,0 +1,128 @@
+<section class="section" id="story">
+  <div class="wrap story-grid">
+    <div class="story-copy reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2>Sejak hari ini.<br /><span class="translation">Since day one.</span></h2>
+      <p class="lead">
+        Juandi — most people know him as Andi — started NIR-MA-TA as a single
+        cart on the roadside in Senggigi. No electricity, no fancy machine.
+        Beans ground by hand, espresso pulled by hand, brewed to order for
+        whoever pulled up a stool.
+      </p>
+      <p class="lead">
+        Travellers kept stopping. They kept coming back. Some left a sticker on
+        the cart on their way out — you'll still find them plastered across it,
+        from every corner of the world. Over a year on the road, that one cart
+        earned a perfect run of 5-star reviews. Now it's a shop of its own,
+        right next to the money exchange on Jl. Raya Senggigi — same coffee,
+        same conversation, same guy.
+      </p>
+
+      <blockquote class="story-quote">
+        <p>
+          "Awesome coffee made from fresh local beans. Best espresso I've had
+          in Lombok. Made without electricity — <strong>just gas and muscle</strong>
+          on a manual espresso machine, with proper extraction technique."
+        </p>
+        <cite>— Dominik Krchnavy, Google review</cite>
+      </blockquote>
+    </div>
+
+    <div class="story-stats reveal-stagger">
+      <div class="stat card">
+        <span class="stat-num">5.0★</span>
+        <span class="stat-label">average rating</span>
+      </div>
+      <div class="stat card">
+        <span class="stat-num">84</span>
+        <span class="stat-label">Google reviews</span>
+      </div>
+      <div class="stat card">
+        <span class="stat-num">1+ yr</span>
+        <span class="stat-label">loved on the road, before the shop</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  .translation {
+    display: block;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 500;
+    font-size: 0.5em;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+
+  .story-copy .lead {
+    margin-bottom: 16px;
+    max-width: 60ch;
+  }
+
+  .story-quote {
+    margin-top: 26px;
+    padding: 20px 24px;
+    border-left: 3px solid var(--red);
+    background: var(--bg-raised);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .story-quote p {
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .story-quote cite {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: normal;
+  }
+
+  .story-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stat {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--red);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--ink-dim);
+  }
+
+  @media (max-width: 900px) {
+    .story-grid {
+      grid-template-columns: 1fr;
+    }
+    .story-stats {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .stat {
+      flex: 1 1 160px;
+    }
+  }
+</style>

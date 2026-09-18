@@ -1,0 +1,98 @@
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="/images/logo.webp" alt="NIR-MA-TA Coffee" width="40" height="40" />
+      <div>
+        <strong>NIR&#8209;MA&#8209;TA COFFEE</strong>
+        <span>Senggigi, Lombok</span>
+      </div>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#find-us">Find Us</a>
+    </nav>
+
+    <div class="footer-contact">
+      <a href="https://wa.me/6287860149337" target="_blank" rel="noopener noreferrer">0878-6014-9337</a>
+      <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer">@nir.ma.ta</a>
+      <span>Every day, 7am – 10pm WITA</span>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>&copy; {new Date().getFullYear()} NIR-MA-TA Coffee.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: rgba(255, 255, 255, 0.88);
+    padding-top: 48px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-brand img {
+    border-radius: 8px;
+  }
+
+  .footer-brand div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-brand strong {
+    font-family: "Baloo 2", sans-serif;
+    font-size: 1.05rem;
+  }
+
+  .footer-brand span {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .footer-nav, .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-nav a, .footer-contact a, .footer-contact span {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.94rem;
+  }
+
+  .footer-nav a:hover, .footer-contact a:hover {
+    color: var(--red-pure);
+  }
+
+  .footer-bottom {
+    padding: 20px 24px;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 700px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

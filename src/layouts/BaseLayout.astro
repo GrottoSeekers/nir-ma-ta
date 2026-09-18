@@ -1,0 +1,96 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "NIR-MA-TA COFFEE — Senggigi, Lombok",
+  description = "Hand-brewed coffee in Senggigi, Lombok. Started as a one-man cart on Jl. Raya Senggigi, now a shop of its own. Rated 5.0 from 84 Google reviews.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL("/og-image.png", Astro.site);
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  name: "NIR-MA-TA COFFEE",
+  image: ogImageURL.toString(),
+  url: "https://nir-ma-ta.com",
+  telephone: "+62 878-6014-9337",
+  priceRange: "Rp 20,000–35,000",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Jl. Raya Senggigi",
+    addressLocality: "Senggigi, Kec. Batu Layar",
+    addressRegion: "Kabupaten Lombok Barat, Nusa Tenggara Barat",
+    postalCode: "83355",
+    addressCountry: "ID",
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "07:00",
+    closes: "22:00",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "84",
+  },
+  sameAs: ["https://www.instagram.com/nir.ma.ta"],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="NIR-MA-TA COFFEE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="color-scheme" content="light" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      const revealTargets = document.querySelectorAll(".reveal, .reveal-stagger");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+      );
+      revealTargets.forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

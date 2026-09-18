@@ -1,0 +1,135 @@
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Senggigi, Lombok</span>
+      <h1>Senggigi's most-loved coffee, one cup at a time.</h1>
+      <p class="lead">
+        What started as a one-man cart on the road through Senggigi is now a shop
+        of its own — same hand-brewed coffee, same guy, same warm welcome. Stop
+        by, say hi, and see why 84 people gave it five stars.
+      </p>
+
+      <div class="hero-cta-row">
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=NIR-MA-TA+COFFEE+Senggigi+Lombok"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Get Directions
+        </a>
+        <a href="https://wa.me/6287860149337" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          Message on WhatsApp
+        </a>
+      </div>
+
+      <div class="hero-trust">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><strong>5.0</strong> from 84 Google reviews</span>
+        <span class="dot">·</span>
+        <span>Open daily, 7am – 10pm</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <img
+        src="/images/cart-street.webp"
+        alt="Juandi serving coffee from the NIR-MA-TA cart on the roadside in Senggigi, with customers seated nearby"
+        width="1000"
+        height="1777"
+        loading="eager"
+      />
+      <div class="hero-badge">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <strong>5.0</strong>
+        <span>(84)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: clamp(40px, 7vw, 72px) 0 clamp(56px, 8vw, 96px);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.8fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.08;
+    margin-bottom: 18px;
+  }
+
+  .hero-copy .lead {
+    margin-bottom: 30px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+  }
+
+  .hero-trust .dot {
+    color: var(--line-strong);
+  }
+
+  .hero-visual {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    aspect-ratio: 4 / 5;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-badge {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 14px 30px -12px rgba(23, 19, 16, 0.4);
+  }
+
+  .hero-badge .stars {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-visual {
+      aspect-ratio: 4 / 3;
+      order: -1;
+    }
+  }
+</style>
