@@ -7,12 +7,50 @@
     <a href="https://www.instagram.com/nir.ma.ta" target="_blank" rel="noopener noreferrer" class="footer-ig">@nir.ma.ta</a>
   </div>
   <div class="wrap footer-credit">
-    <img src="/images/cgd-logo.png" alt="CG Design" class="credit-logo" width="52" height="19" />
-    Want a website like this? Reach out to —
-    <a href="https://cgdesignaus.com" target="_blank" rel="noopener noreferrer">cgdesignaus.com</a>
-    · <a href="mailto:cgdesignaus@outlook.com">cgdesignaus@outlook.com</a>
-    · <a href="https://www.instagram.com/cgdesignaus" target="_blank" rel="noopener noreferrer">@cgdesignaus</a>
-    · <a href="https://www.facebook.com/cgdesignaus" target="_blank" rel="noopener noreferrer">cgdesignaus</a>
+    <div class="credit-lead">
+      <img src="/images/cgd-logo.png" alt="CG Design" class="credit-logo" width="52" height="19" />
+      <span>Want a website like this? Reach out to CG Design —</span>
+    </div>
+    <div class="credit-links">
+      <a href="https://cgdesignaus.com" target="_blank" rel="noopener noreferrer" class="credit-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+          <path d="M3.6 9h16.8" />
+          <path d="M3.6 15h16.8" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        cgdesignaus.com
+      </a>
+      <a href="mailto:cgdesignaus@outlook.com" class="credit-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+          <path d="M3 7l9 6l9 -6" />
+        </svg>
+        cgdesignaus@outlook.com
+      </a>
+      <a href="https://wa.me/447306100251" target="_blank" rel="noopener noreferrer" class="credit-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+          <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+        </svg>
+        WhatsApp
+      </a>
+      <a href="https://www.instagram.com/cgdesignaus" target="_blank" rel="noopener noreferrer" class="credit-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"></path>
+          <path d="M17.5 6.5h.01"></path>
+        </svg>
+        @cgdesignaus
+      </a>
+      <a href="https://www.facebook.com/cgdesignaus" target="_blank" rel="noopener noreferrer" class="credit-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+        </svg>
+        cgdesignaus
+      </a>
+    </div>
   </div>
 </footer>
 
@@ -56,26 +94,47 @@
 
   .footer-credit {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 14px 0 18px;
+    padding: 16px 0 20px;
     font-size: 12px;
-    line-height: 1.6;
     color: #6b6b6b;
   }
 
-  .footer-credit a {
-    color: #9a9a9a;
-  }
-
-  .footer-credit a:hover {
-    color: var(--red);
+  .credit-lead {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 10px;
   }
 
   .credit-logo {
     display: inline-block;
     height: 15px;
     width: auto;
-    vertical-align: middle;
-    margin-right: 7px;
+    flex: 0 0 auto;
     opacity: 0.85;
+  }
+
+  .credit-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .credit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #9a9a9a;
+    white-space: nowrap;
+  }
+
+  .credit-link svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+  }
+
+  .credit-link:hover {
+    color: var(--red);
   }
 </style>
