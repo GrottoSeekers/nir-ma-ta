@@ -181,3 +181,34 @@ h2 {
 #find {
   scroll-margin-top: 90px;
 }
+
+.just-arrived .eyebrow,
+.just-arrived .badge {
+  animation: section-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.just-arrived h1,
+.just-arrived h2 {
+  animation: section-rise 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 70ms;
+}
+
+@keyframes section-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .just-arrived .eyebrow,
+  .just-arrived .badge,
+  .just-arrived h1,
+  .just-arrived h2 {
+    animation: none;
+  }
+}
